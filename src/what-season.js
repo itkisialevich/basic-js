@@ -12,12 +12,14 @@ const { NotImplementedError } = require("../extensions/index.js");
  *
  */
 function getSeason(date) {
-  if (!date) {
+  if (date === undefined) {
     return "Unable to determine the time of year!";
   }
 
-  if (Object.prototype.toString.call(date) !== "[object Date]") {
-    throw new Error("Invalid Date!");
+  try {
+    date.getTime();
+  } catch (error) {
+    throw new Error("Invalid date!");
   }
 
   if (date.getMonth() >= 0 && date.getMonth() < 2) {
